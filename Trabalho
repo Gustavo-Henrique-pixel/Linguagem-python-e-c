@@ -1,0 +1,361 @@
+PYTHON.
+
+1. Calculadora de vários números
+# Programa 1: Calculadora de vários números
+quantidade = int(input("Quantos números você deseja digitar? "))
+numeros = []
+
+for i in range(quantidade):
+    num = float(input(f"Digite o {i+1}º número: "))
+    numeros.append(num)
+
+soma = sum(numeros)
+media = soma / quantidade
+maior = max(numeros)
+menor = min(numeros)
+
+print(f"Soma total: {soma}")
+print(f"Média: {media}")
+print(f"Maior número: {maior}")
+print(f"Menor número: {menor}")
+2. Sistema de votação
+# Programa 2: Sistema de votação
+votos = [0, 0, 0]  # índice 0 -> candidato 1, 1 -> candidato 2, 2 -> candidato 3
+
+total_votantes = int(input("Quantas pessoas vão votar? "))
+
+for i in range(total_votantes):
+    while True:
+        voto = int(input(f"Voto da pessoa {i+1} (1, 2 ou 3): "))
+        if voto in [1, 2, 3]:
+            votos[voto-1] += 1
+            break
+        else:
+            print("Voto inválido! Digite 1, 2 ou 3.")
+
+print(f"Votos do candidato 1: {votos[0]}")
+print(f"Votos do candidato 2: {votos[1]}")
+print(f"Votos do candidato 3: {votos[2]}")
+
+max_votos = max(votos)
+vencedor = votos.index(max_votos) + 1
+print(f"O vencedor é o candidato {vencedor} com {max_votos} votos.")
+3. Tabuada completa personalizada
+# Programa 3: Tabuada personalizada
+while True:
+    numero = int(input("Digite um número para ver a tabuada: "))
+    for i in range(1, 11):
+        print(f"{numero} x {i} = {numero*i}")
+   
+    continuar = input("Deseja ver a tabuada de outro número? (1 - Sim, 0 - Não): ")
+    if continuar != '1':
+        break
+4. Controle de notas da turma
+# Programa 4: Controle de notas da turma
+num_alunos = int(input("Quantos alunos existem na turma? "))
+notas = []
+
+for i in range(num_alunos):
+    nota = float(input(f"Digite a nota do aluno {i+1}: "))
+    notas.append(nota)
+
+media_turma = sum(notas)/num_alunos
+aprovados = sum(1 for n in notas if n >= 7)
+recuperacao = sum(1 for n in notas if 5 <= n < 7)
+reprovados = sum(1 for n in notas if n < 5)
+
+print(f"Média da turma: {media_turma}")
+print(f"Aprovados: {aprovados}")
+print(f"Recuperação: {recuperacao}")
+print(f"Reprovados: {reprovados}")
+5. Jogo de adivinhação
+# Programa 5: Jogo de adivinhação
+numero_secreto = 37
+tentativas = 0
+
+while True:
+    chute = int(input("Tente adivinhar o número secreto: "))
+    tentativas += 1
+    if chute < numero_secreto:
+        print("Muito baixo!")
+    elif chute > numero_secreto:
+        print("Muito alto!")
+    else:
+        print(f"Parabéns! Você acertou em {tentativas} tentativas.")
+        break
+6. Estatísticas de números
+# Programa 6: Estatísticas de números
+contador = 0
+positivos = 0
+negativos = 0
+soma_total = 0
+
+while True:
+    num = float(input("Digite um número (0 para sair): "))
+    if num == 0:
+        break
+    contador += 1
+    soma_total += num
+    if num > 0:
+        positivos += 1
+    elif num < 0:
+        negativos += 1
+
+print(f"Números digitados: {contador}")
+print(f"Positivos: {positivos}")
+print(f"Negativos: {negativos}")
+print(f"Soma total: {soma_total}")
+7. Simulador de crescimento de investimento
+# Programa 7: Simulador de investimento
+valor_inicial = float(input("Digite o valor inicial: "))
+taxa_juros = float(input("Digite a taxa de juros anual (%): "))
+anos = int(input("Digite o número de anos: "))
+
+valor = valor_inicial
+for ano in range(1, anos+1):
+    valor += valor * (taxa_juros / 100)
+    print(f"Ano {ano}: {valor:.2f}")
+8. Sistema de compras
+# Programa 8: Sistema de compras
+total_valor = 0
+total_itens = 0
+produtos = 0
+
+while True:
+    preco = float(input("Digite o preço do produto (0 para encerrar): "))
+    if preco == 0:
+        break
+    quantidade = int(input("Digite a quantidade: "))
+    total_valor += preco * quantidade
+    total_itens += quantidade
+    produtos += 1
+
+if produtos > 0:
+    preco_medio = total_valor / produtos
+else:
+    preco_medio = 0
+
+print(f"Valor total da compra: {total_valor}")
+print(f"Quantidade total de itens: {total_itens}")
+print(f"Preço médio dos produtos: {preco_medio:.2f}")
+
+LINGUAGEM C
+
+1. Calculadora de vários números
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    float num, soma = 0, media, maior, menor;
+
+    printf("Quantos números você deseja digitar? ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("Digite o %dº número: ", i + 1);
+        scanf("%f", &num);
+
+        soma += num;
+        if (i == 0) {
+            maior = menor = num;
+        } else {
+            if (num > maior) maior = num;
+            if (num < menor) menor = num;
+        }
+    }
+
+    media = soma / n;
+
+    printf("Soma total: %.2f\n", soma);
+    printf("Média: %.2f\n", media);
+    printf("Maior número: %.2f\n", maior);
+    printf("Menor número: %.2f\n", menor);
+
+    return 0;
+}
+2. Sistema de votação
+#include <stdio.h>
+
+int main() {
+    int votos[3] = {0, 0, 0};
+    int total_votantes, voto, i;
+
+    printf("Quantas pessoas vão votar? ");
+    scanf("%d", &total_votantes);
+
+    for (i = 0; i < total_votantes; i++) {
+        do {
+            printf("Voto da pessoa %d (1, 2 ou 3): ", i + 1);
+            scanf("%d", &voto);
+            if (voto >= 1 && voto <= 3) {
+                votos[voto - 1]++;
+                break;
+            } else {
+                printf("Voto inválido! Digite 1, 2 ou 3.\n");
+            }
+        } while (1);
+    }
+
+    printf("Votos do candidato 1: %d\n", votos[0]);
+    printf("Votos do candidato 2: %d\n", votos[1]);
+    printf("Votos do candidato 3: %d\n", votos[2]);
+
+    int max = votos[0], vencedor = 1;
+    for (i = 1; i < 3; i++) {
+        if (votos[i] > max) {
+            max = votos[i];
+            vencedor = i + 1;
+        }
+    }
+    printf("O vencedor é o candidato %d com %d votos.\n", vencedor, max);
+
+    return 0;
+}
+3. Tabuada completa personalizada
+#include <stdio.h>
+
+int main() {
+    int numero, i, continuar = 1;
+
+    while (continuar == 1) {
+        printf("Digite um número para ver a tabuada: ");
+        scanf("%d", &numero);
+
+        for (i = 1; i <= 10; i++) {
+            printf("%d x %d = %d\n", numero, i, numero * i);
+        }
+
+        printf("Deseja ver a tabuada de outro número? (1 - Sim, 0 - Não): ");
+        scanf("%d", &continuar);
+    }
+
+    return 0;
+}
+4. Controle de notas da turma
+#include <stdio.h>
+
+int main() {
+    int num_alunos, i, aprovados = 0, recuperacao = 0, reprovados = 0;
+    float nota, soma = 0, media;
+
+    printf("Quantos alunos existem na turma? ");
+    scanf("%d", &num_alunos);
+
+    for (i = 0; i < num_alunos; i++) {
+        printf("Digite a nota do aluno %d: ", i + 1);
+        scanf("%f", &nota);
+        soma += nota;
+
+        if (nota >= 7) aprovados++;
+        else if (nota >= 5) recuperacao++;
+        else reprovados++;
+    }
+
+    media = soma / num_alunos;
+
+    printf("Média da turma: %.2f\n", media);
+    printf("Aprovados: %d\n", aprovados);
+    printf("Recuperação: %d\n", recuperacao);
+    printf("Reprovados: %d\n", reprovados);
+
+    return 0;
+}
+5. Jogo de adivinhação
+#include <stdio.h>
+
+int main() {
+    int numero_secreto = 37, chute, tentativas = 0;
+
+    do {
+        printf("Tente adivinhar o número secreto: ");
+        scanf("%d", &chute);
+        tentativas++;
+
+        if (chute < numero_secreto) printf("Muito baixo!\n");
+        else if (chute > numero_secreto) printf("Muito alto!\n");
+    } while (chute != numero_secreto);
+
+    printf("Parabéns! Você acertou em %d tentativas.\n", tentativas);
+
+    return 0;
+}
+6. Estatísticas de números
+#include <stdio.h>
+
+int main() {
+    float num;
+    int contador = 0, positivos = 0, negativos = 0;
+    float soma = 0;
+
+    while (1) {
+        printf("Digite um número (0 para sair): ");
+        scanf("%f", &num);
+        if (num == 0) break;
+
+        contador++;
+        soma += num;
+        if (num > 0) positivos++;
+        else if (num < 0) negativos++;
+    }
+
+    printf("Números digitados: %d\n", contador);
+    printf("Positivos: %d\n", positivos);
+    printf("Negativos: %d\n", negativos);
+    printf("Soma total: %.2f\n", soma);
+
+    return 0;
+}
+7. Simulador de crescimento de investimento
+#include <stdio.h>
+
+int main() {
+    float valor_inicial, taxa_juros;
+    int anos, i;
+
+    printf("Digite o valor inicial: ");
+    scanf("%f", &valor_inicial);
+    printf("Digite a taxa de juros anual (%%): ");
+    scanf("%f", &taxa_juros);
+    printf("Digite o número de anos: ");
+    scanf("%d", &anos);
+
+    float valor = valor_inicial;
+    for (i = 1; i <= anos; i++) {
+        valor += valor * (taxa_juros / 100);
+        printf("Ano %d: %.2f\n", i, valor);
+    }
+
+    return 0;
+}
+8. Sistema de compras
+#include <stdio.h>
+
+int main() {
+    float preco, total_valor = 0, preco_medio;
+    int quantidade, total_itens = 0, produtos = 0;
+
+    while (1) {
+        printf("Digite o preço do produto (0 para encerrar): ");
+        scanf("%f", &preco);
+        if (preco == 0) break;
+
+        printf("Digite a quantidade: ");
+        scanf("%d", &quantidade);
+
+        total_valor += preco * quantidade;
+        total_itens += quantidade;
+        produtos++;
+    }
+
+    if (produtos > 0)
+        preco_medio = total_valor / produtos;
+    else
+        preco_medio = 0;
+
+    printf("Valor total da compra: %.2f\n", total_valor);
+    printf("Quantidade total de itens: %d\n", total_itens);
+    printf("Preço médio dos produtos: %.2f\n", preco_medio);
+
+
+    return 0;
+}
